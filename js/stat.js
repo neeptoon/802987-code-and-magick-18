@@ -38,14 +38,16 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = '#000';
   ctx.fillText('Ура вы победили!', CLOUD_X + LEFT_MARGIN, CLOUD_Y + GAP);
   ctx.fillText('Список результатов:', CLOUD_X + LEFT_MARGIN, CLOUD_Y + GAP + TEXT_HEIGHT);
-
+  ctx.textBaseline = 'bottom';
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < names.length; i++) {
-    var secondColor = 'hsl(245, ' + Math.round( Math.random() * maxSaturation) + '%, 50%)';
+    var secondColor = 'hsl(245, ' + Math.round(Math.random() * maxSaturation) + '%, 50%)';
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP), CLOUD_HEIGHT - BOTTOM_MARGIN);
+    ctx.fillText(Math.round(times[i]), CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP), CLOUD_HEIGHT - 2 * BOTTOM_MARGIN - COLUMN_HEIGHT * times[i] / maxTime);
     ctx.fillStyle = names[i] === 'Вы' ? mainColor : secondColor;
     ctx.fillRect(CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP), CLOUD_HEIGHT - 2 * BOTTOM_MARGIN, COLUMN_WIDTH, -(COLUMN_HEIGHT * times[i] / maxTime));
   }
 };
+

@@ -12,12 +12,10 @@ var COLUMN_WIDTH = 40;
 var COLUMN_HEIGHT = 150;
 var mainColor = 'rgba(255, 0, 0)';
 var maxSaturation = 100;
-
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
-
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
@@ -42,12 +40,16 @@ window.renderStatistics = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < names.length; i++) {
+    var pointX = CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP);
+    var bottomPointY = CLOUD_HEIGHT - 2 * BOTTOM_MARGIN;
+    var namesPointY = CLOUD_HEIGHT - BOTTOM_MARGIN;
+    var columnHieghtDependsOnTime = COLUMN_HEIGHT * times[i] / maxTime;
+    var timesPointY = bottomPointY - columnHieghtDependsOnTime;
     var secondColor = 'hsl(245, ' + Math.round(Math.random() * maxSaturation) + '%, 50%)';
     ctx.fillStyle = '#000';
-    ctx.fillText(names[i], CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP), CLOUD_HEIGHT - BOTTOM_MARGIN);
-    ctx.fillText(Math.round(times[i]), CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP), CLOUD_HEIGHT - 2 * BOTTOM_MARGIN - COLUMN_HEIGHT * times[i] / maxTime);
-    ctx.fillStyle = names[i] === 'Вы' ? mainColor : secondColor;
-    ctx.fillRect(CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP), CLOUD_HEIGHT - 2 * BOTTOM_MARGIN, COLUMN_WIDTH, -(COLUMN_HEIGHT * times[i] / maxTime));
+    ctx.fillText(names[i], pointX, namesPointY);
+    ctx.fillText(Math.round(times[i]), pointX, timesPointY);
+    ctx.fillStyle = (names[i] === 'Вы') ? mainColor : secondColor;
+    ctx.fillRect(pointX, bottomPointY, COLUMN_WIDTH, -columnHieghtDependsOnTime);
   }
 };
-

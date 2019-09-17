@@ -4,13 +4,14 @@ var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
-var COLUMN_GAP = 30;
+var COLUMN_GAP = 50;
 var TEXT_HEIGHT = 20;
 var LEFT_MARGIN = 50;
 var BOTTOM_MARGIN = 20;
 var COLUMN_WIDTH = 40;
 var COLUMN_HEIGHT = 150;
 var mainColor = 'rgba(255, 0, 0)';
+var maxSaturation = 100;
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -41,7 +42,7 @@ window.renderStatistics = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < names.length; i++) {
-    var secondColor = 'hsl(245, ' + (25 + Math.random() * (75 + 1 - 25)) + '%, 50%)';
+    var secondColor = 'hsl(245, ' + Math.round( Math.random() * maxSaturation) + '%, 50%)';
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], CLOUD_X + LEFT_MARGIN + i * (COLUMN_WIDTH + COLUMN_GAP), CLOUD_HEIGHT - BOTTOM_MARGIN);
     ctx.fillStyle = names[i] === 'Вы' ? mainColor : secondColor;

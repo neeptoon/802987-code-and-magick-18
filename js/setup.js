@@ -5,13 +5,44 @@ var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Валь
 var colors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyes = ['black', 'red', 'blue', 'yellow', 'green'];
 
-var getRandomNumber = function (arr) {
-  return Math.floor(Math.random() * arr.length);
+var getRandomNumber = function (min, max) {
+  return Math.round(min - 0.5 + Math.random() * max - min + 1);
 };
 
-var Mock = [];
-for (var i = 0; i < 4; i++) {
-  Mock[i] = {name: names[getRandomNumber(names)] + ' ' + surnames[getRandomNumber(surnames)], colors: colors[getRandomNumber(colors)], eyes: eyes[getRandomNumber(eyes)]};
+var wizards = [];
+var amountWizardsRender = 4;
+for (var i = 0; i < amountWizardsRender; i++) {
+  var wizardName = names[getRandomNumber(0, names.length - 1)] + ' ' + surnames[getRandomNumber(0, surnames.length - 1)];
+
+  var wizard = {
+    name: wizardName,
+    colors: colors[getRandomNumber(0, colors.length - 1)],
+    eyes: eyes[getRandomNumber(0, eyes.length - 1)]
+  };
+
+  wizards.push(wizard);
 }
 
+var setupWindow = document.querySelector('.setup');
+setupWindow.classList.remove('hidden');
+var setupSimilarWindow = setupWindow.querySelector('.setup-similar');
+setupSimilarWindow.classList.remove('hidden');
 
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var similarListElement = setupSimilarWindow.querySelector('.setup-similar-list');
+
+var renderWizard = function (wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.colors;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyes;
+  return wizardElement;
+};
+
+var fragment = document.createDocumentFragment();
+
+for (var i = 0; i < amountWizardsRender; i++) {
+  fragment.appendChild(renderWizard(wizards[i]));
+}
+
+similarListElement.appendChild(fragment);

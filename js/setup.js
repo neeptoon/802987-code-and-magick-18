@@ -14,13 +14,13 @@ var amountWizardsRender = 4;
 for (var i = 0; i < amountWizardsRender; i++) {
   var wizardName = names[getRandomNumber(0, names.length - 1)] + ' ' + surnames[getRandomNumber(0, surnames.length - 1)];
 
-  var wizard = {
+  var currentWizard = {
     name: wizardName,
     colors: colors[getRandomNumber(0, colors.length - 1)],
     eyes: eyes[getRandomNumber(0, eyes.length - 1)]
   };
 
-  wizards.push(wizard);
+  wizards.push(currentWizard);
 }
 
 var setupWindow = document.querySelector('.setup');

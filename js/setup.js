@@ -8,20 +8,25 @@ var eyes = ['black', 'red', 'blue', 'yellow', 'green'];
 var getRandomNumber = function (min, max) {
   return Math.round(min - 0.5 + Math.random() * max - min + 1);
 };
-
-var wizards = [];
 var amountWizardsRender = 4;
-for (var i = 0; i < amountWizardsRender; i++) {
-  var wizardName = names[getRandomNumber(0, names.length - 1)] + ' ' + surnames[getRandomNumber(0, surnames.length - 1)];
 
-  var currentWizard = {
-    name: wizardName,
-    colors: colors[getRandomNumber(0, colors.length - 1)],
-    eyes: eyes[getRandomNumber(0, eyes.length - 1)]
-  };
+var getWizards = function () {
+  var wizardsList = [];
+  for (var i = 0; i < amountWizardsRender; i++) {
+    var wizardName = names[getRandomNumber(0, names.length - 1)] + ' ' + surnames[getRandomNumber(0, surnames.length - 1)];
 
-  wizards.push(currentWizard);
-}
+    var currentWizard = {
+      name: wizardName,
+      colors: colors[getRandomNumber(0, colors.length - 1)],
+      eyes: eyes[getRandomNumber(0, eyes.length - 1)]
+    };
+
+    wizardsList.push(currentWizard);
+  }
+  return wizardsList;
+};
+
+var wizards = getWizards();
 
 var setupWindow = document.querySelector('.setup');
 setupWindow.classList.remove('hidden');

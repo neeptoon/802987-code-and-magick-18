@@ -55,12 +55,45 @@ renderWizards();
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
+var setupUserName = setup.querySelector('.setup-user-name');
+var ESC_CODE = 27;
+var ENTER_CODE = 13;
+
+var escKeydownHandler = function (evt) {
+  if (evt.keyCode === ESC_CODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', escKeydownHandler);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', escKeydownHandler);
+};
+
 
 setupOpen.addEventListener('click', function () {
-  setup.classList.remove('hidden');
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_CODE) {
+    openPopup();
+  }
 });
 
 setupClose.addEventListener('click', function () {
-  setup.classList.add('hidden');
+  closePopup();
 });
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_CODE) {
+    closePopup();
+  }
+});
+
 

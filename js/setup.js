@@ -111,4 +111,15 @@ setupUserName.addEventListener('blur', function () {
   addEscDownListener();
 });
 
+setupUserName.addEventListener('invalid', function () {
+  if (setupUserName.validity.tooShort) {
+    setupUserName.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (setupUserName.validity.tooLong) {
+    setupUserName.setCustomValidity('Палехче, приятель!!');
+  } else if (setupUserName.validity.valueMissing) {
+    setupUserName.setCustomValidity('Заполни поле');
+  } else {
+    setupUserName.setCustomValidity('');
+  }
+});
 

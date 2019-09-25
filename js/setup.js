@@ -65,16 +65,23 @@ var escKeydownHandler = function (evt) {
   }
 };
 
+var addEscDownListener = function () {
+  document.addEventListener('keydown', escKeydownHandler);
+};
+
+var removeEscDownListener = function () {
+  document.removeEventListener('keydown', escKeydownHandler);
+};
+
 var openPopup = function () {
   setup.classList.remove('hidden');
-  document.addEventListener('keydown', escKeydownHandler);
+  addEscDownListener();
 };
 
 var closePopup = function () {
   setup.classList.add('hidden');
-  document.removeEventListener('keydown', escKeydownHandler);
+  removeEscDownListener();
 };
-
 
 setupOpen.addEventListener('click', function () {
   openPopup();
@@ -94,6 +101,14 @@ setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_CODE) {
     closePopup();
   }
+});
+
+setupUserName.addEventListener('focus', function () {
+  removeEscDownListener();
+});
+
+setupUserName.addEventListener('blur', function () {
+  addEscDownListener();
 });
 
 

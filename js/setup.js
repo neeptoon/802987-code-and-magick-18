@@ -4,6 +4,7 @@ var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Крис�
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var colors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyes = ['black', 'red', 'blue', 'yellow', 'green'];
+var fireballs = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var getRandomNumber = function (min, max) {
   return Math.round(min - 0.5 + Math.random() * max - min + 1);
@@ -52,12 +53,12 @@ var renderWizards = function () {
 };
 renderWizards();
 
+var ESC_CODE = 27;
+var ENTER_CODE = 13;
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
 var setupUserName = setup.querySelector('.setup-user-name');
-var ESC_CODE = 27;
-var ENTER_CODE = 13;
 
 var escKeydownHandler = function (evt) {
   if (evt.keyCode === ESC_CODE) {
@@ -123,3 +124,30 @@ setupUserName.addEventListener('invalid', function () {
   }
 });
 
+var setupPlayer = document.querySelector('.setup-player');
+var setupWizard = setupPlayer.querySelector('.setup-wizard');
+var wizardCoat = setupWizard.querySelector('.wizard-coat');
+var wizardCoatInput = setupPlayer.querySelector('input[name="coat-color"]');
+var wizardEyesInput = setupPlayer.querySelector('input[name="eyes-color"]');
+var wizardFireball = setupPlayer.querySelector('.setup-fireball-wrap');
+var wizardEyes = setupWizard.querySelector('.wizard-eyes');
+var wizardFireballInput = wizardFireball.querySelector('input[name="fireball-color"]');
+
+var changeParam = function (arr) {
+  return arr[getRandomNumber(0, arr.length - 1)];
+};
+
+wizardCoat.addEventListener('click', function () {
+  wizardCoat.style.fill = changeParam(colors);
+  wizardCoatInput.value = wizardCoat.style.fill;
+});
+
+wizardEyes.addEventListener('click', function () {
+  wizardEyes.style.fill = changeParam(eyes);
+  wizardEyesInput.value = wizardEyes.style.fill;
+});
+
+wizardFireball.addEventListener('click', function () {
+  wizardFireball.style.background = changeParam(fireballs);
+  wizardFireballInput.value = wizardFireball.style.background;
+});

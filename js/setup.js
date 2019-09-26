@@ -30,7 +30,6 @@ var getWizards = function () {
 var wizards = getWizards();
 
 var setupWindow = document.querySelector('.setup');
-setupWindow.classList.remove('hidden');
 var setupSimilarWindow = setupWindow.querySelector('.setup-similar');
 setupSimilarWindow.classList.remove('hidden');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -56,9 +55,8 @@ renderWizards();
 var ESC_CODE = 27;
 var ENTER_CODE = 13;
 var setupOpen = document.querySelector('.setup-open');
-var setup = document.querySelector('.setup');
-var setupClose = setup.querySelector('.setup-close');
-var setupUserName = setup.querySelector('.setup-user-name');
+var setupClose = setupWindow.querySelector('.setup-close');
+var setupUserName = setupWindow.querySelector('.setup-user-name');
 
 var escKeydownHandler = function (evt) {
   if (evt.keyCode === ESC_CODE) {
@@ -75,12 +73,12 @@ var removeEscDownListener = function () {
 };
 
 var openPopup = function () {
-  setup.classList.remove('hidden');
+  setupWindow.classList.remove('hidden');
   addEscDownListener();
 };
 
 var closePopup = function () {
-  setup.classList.add('hidden');
+  setupWindow.classList.add('hidden');
   removeEscDownListener();
 };
 

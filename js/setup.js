@@ -58,7 +58,9 @@ var setupClose = setupWindow.querySelector('.setup-close');
 var setupUserName = setupWindow.querySelector('.setup-user-name');
 
 var escKeydownHandler = function (evt) {
-  if (evt.keyCode === ESC_CODE) {
+  if (evt.target === setupUserName) {
+    evt.stopPropagation();
+  } else if (evt.keyCode === ESC_CODE) {
     closePopup();
   }
 };
@@ -101,13 +103,13 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-setupUserName.addEventListener('focus', function () {
-  removeEscDownListener();
-});
+// setupUserName.addEventListener('focus', function () {
+//   removeEscDownListener();
+// });
 
-setupUserName.addEventListener('blur', function () {
-  addEscDownListener();
-});
+// setupUserName.addEventListener('blur', function () {
+//   addEscDownListener();
+// });
 
 setupUserName.addEventListener('invalid', function () {
   if (setupUserName.validity.tooShort) {

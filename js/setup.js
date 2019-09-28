@@ -31,7 +31,6 @@ var wizards = getWizards();
 
 var setupWindow = document.querySelector('.setup');
 var setupSimilarWindow = setupWindow.querySelector('.setup-similar');
-setupSimilarWindow.classList.remove('hidden');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 var similarListElement = setupSimilarWindow.querySelector('.setup-similar-list');
 

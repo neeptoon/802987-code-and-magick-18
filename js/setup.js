@@ -103,14 +103,6 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-// setupUserName.addEventListener('focus', function () {
-//   removeEscDownListener();
-// });
-
-// setupUserName.addEventListener('blur', function () {
-//   addEscDownListener();
-// });
-
 setupUserName.addEventListener('invalid', function () {
   if (setupUserName.validity.tooShort) {
     setupUserName.setCustomValidity('Имя должно состоять минимум из 2-х символов');
